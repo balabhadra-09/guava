@@ -1,19 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-inter: "Inter", sans-serif;
   --font-outfit: "Outfit", sans-serif;
 
-  --color-dark-900: #0a0a0f;
-  --color-dark-800: #12121a;
-  --color-dark-700: #1a1a24;
+  /* Primary dark backgrounds */
+  --color-dark-950: #0a0a0f;
+  --color-dark-900: #0f172a;
+  --color-dark-800: #1e293b;
+  --color-dark-700: #334155;
+  --color-dark-600: #475569;
 
+  /* Accent colors - Vibrant modern palette */
   --color-neon-blue: #3b82f6;
+  --color-neon-cyan: #06b6d4;
   --color-neon-purple: #8b5cf6;
   --color-neon-pink: #ec4899;
+  --color-neon-coral: #f97316;
+  --color-neon-lime: #84cc16;
+  --color-electric-blue: #2563eb;
+
+  /* Gradient mesh colors */
+  --color-gradient-start: #3b82f6;
+  --color-gradient-mid: #8b5cf6;
+  --color-gradient-end: #ec4899;
 }
 
 @layer utilities {
+
+  /* Glassmorphism */
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
   }
@@ -22,15 +38,100 @@
     @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl;
   }
 
+  .glass-card {
+    @apply bg-dark-800/60 backdrop-blur-lg border border-white/10;
+  }
+
+  /* Gradient text */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-purple;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+  }
+
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-purple;
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-coral via-neon-pink to-neon-purple;
+  }
+
+  /* Animated gradient background */
+  .gradient-animate {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  @keyframes gradientShift {
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.3);
+  }
+
+  /* Mesh gradient background */
+  .mesh-gradient {
+    background:
+      radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+      var(--color-dark-900);
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Smooth scroll */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
+/* Base styles */
 body {
   @apply bg-dark-900 text-white font-inter antialiased;
+  overflow-x: hidden;
 }
 
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -45,5 +146,37 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-dark-800);
+  background: var(--color-dark-600);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: white;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-neon-blue);
+  outline-offset: 2px;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-outfit font-bold;
+}
+
+/* Link reset */
+a {
+  @apply transition-colors duration-200;
+}
+
+/* Image defaults */
+img {
+  @apply max-w-full h-auto;
 }

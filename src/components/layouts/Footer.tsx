@@ -9,7 +9,7 @@ export function Footer() {
                     <div className="col-span-1 md:col-span-1">
                         <Link to="/" className="flex items-center gap-2 text-2xl font-bold font-outfit mb-6">
                             <Sparkles className="w-6 h-6 text-neon-blue" />
-                            <span className="text-gradient">Synapse</span>
+                            <span className="text-white">Guava</span>
                         </Link>
                         <p className="text-gray-400 mb-6">
                             Empowering brands with next-generation AI and digital solutions.
@@ -52,7 +52,7 @@ export function Footer() {
                 </div>
 
                 <div className="border-t border-white/10 pt-8 mt-8 text-center text-gray-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} Synapse Digital. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Guava. All rights reserved.</p>
                 </div>
             </div>
         </footer>
